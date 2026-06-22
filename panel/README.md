@@ -14,6 +14,8 @@ This directory contains the raw outputs and analysis from a single AI Agent Coun
 
 Panel models had web search and web fetch enabled.
 
+> **Tier used:** This run used a **premium panel** (three frontier models). For a cost-efficient variant, use 3–5 smaller models on the panel and a frontier synthesizer — see [README § Why fuse instead of one flagship model?](../README.md#why-fuse-instead-of-one-flagship-model) and [OpenRouter Fusion benchmarks](https://openrouter.ai/blog/announcements/fusion-beats-frontier/).
+
 ## Fusion workflow
 
 1. **Panel** — the same expert brief ([`../prompts/panel-brief.md`](../prompts/panel-brief.md)) sent to all three models in parallel

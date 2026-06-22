@@ -6,7 +6,7 @@ The polite customer during a total prod outage? Every model on the council flagg
 
 The load-bearing insight from running this for a week: the disagreement is the value, not the noise. If three top models gave you the same answer, you'd have paid for one slow single-model run. The fact that they disagree on architecture while agreeing on the obvious is the deliberation — and the deliberation is what earns the verdict.
 
-The POC: built on OpenRouter Fusion — panel → judge → synthesizer → verdict. The cost-efficient variant works too (smaller models + one good reviewer often beats three flagships, and Fusion's own benchmarks back it up).
+The POC: built on OpenRouter Fusion — panel → judge → synthesizer → verdict. The cost-efficient variant works too: a few smaller models for parallel planning, one bigger model to fuse them, often beats a single flagship alone — at a fraction of the cost. OpenRouter's DRACO benchmarks back the pattern directionally (budget panel ~50% of Fable 5 cost, within 1% of its score). Not a guarantee for every task — see the repo disclaimers.
 
 Infographic below shows the council at a glance 👇
 

@@ -15,6 +15,7 @@ This skill was produced by merging three independent panel model outputs (Claude
 | Comparative review | [panel/comparative-review.md](../../panel/comparative-review.md) |
 | Production roadmap | [panel/production-roadmap.md](../../panel/production-roadmap.md) |
 | Panel brief (reproduce) | [prompts/panel-brief.md](../../prompts/panel-brief.md) |
+| Cost-quality pattern & disclaimers | [README § Why fuse](../../README.md#why-fuse-instead-of-one-flagship-model) |
 
 ## Key stress-test scenarios
 

@@ -119,17 +119,25 @@ That roadmap is the actual deliverable. The `SKILL.md` is the artifact. The AI A
 
 ## If you're cost-conscious: smaller models, more of them
 
-Running three top-tier reasoning models on every idea gets expensive fast. The pattern I'm testing next is the cost-efficient variant — and I now have third-party evidence it works.
+Running three top-tier reasoning models on every idea gets expensive fast. The pattern worth testing — and the one OpenRouter's own benchmarks support — is **not** "always buy the biggest model." It is: **spend cheap parallel inference on planning, spend once on fusion.**
 
-**OpenRouter's own Fusion benchmarks** show that lighter panel combinations can match a frontier model at a fraction of the cost. A panel of Gemini 3 Flash, Kimi K2.6, and DeepSeek V4 Pro — three *smaller* models, not flagship — ran at roughly **half the cost of Claude Fable 5** while landing within 1% of its benchmark score. The diversity gain came from having multiple independent perspectives, not from each perspective being the smartest possible model.
+**OpenRouter's Fusion benchmarks** on the [DRACO deep-research suite](https://openrouter.ai/blog/announcements/fusion-beats-frontier/) found that a panel of Gemini 3 Flash, Kimi K2.6, and DeepSeek V4 Pro — three *smaller* models, not flagship — scored **64.7%** when fused by Opus 4.8. That beat solo GPT-5.5 (60.0%) and solo Opus 4.8 (58.8%), came within ~1% of solo Claude Fable 5 (65.3%), and ran at roughly **half the cost** of Fable 5 alone. A frontier panel fused together reached **69.0%** — above any individual model tested.
 
-The shape of the cost-efficient council is the same:
+The economics make intuitive sense:
 
-1. Run the same expert-panel prompt across several smaller, cheaper models (5 is a good number, picked from different providers).
-2. Use a single judge model — doesn't have to be the biggest, just a clean context window — to surface consensus, contradictions, and unique insights.
+- **Panel (cheap):** multiple independent perspectives catch blind spots a single model misses. Diversity of architecture and training matters more than each panel member being the smartest possible model.
+- **Judge (mid):** structures the disagreement so the synthesizer does not drown in three full outputs.
+- **Synthesizer (frontier):** one expensive pass that weighs trade-offs and writes the final artifact. This is where depth earns its price.
+
+The shape of the cost-efficient council:
+
+1. Run the same expert-panel prompt across several smaller, cheaper models (3–5 is a good number, picked from different providers).
+2. Use a judge model — doesn't have to be the biggest, just a clean context window — to surface consensus, contradictions, and unique insights.
 3. Use a synthesizer (typically a larger model like Opus 4.8, which has the reasoning budget to weigh all panel outputs) to write the final artifact.
 
-I haven't validated this exact pattern in production yet. But the underlying mechanism — disagreement is information, and synthesis is where the value lives — is the same one Fusion's own numbers already validated. The frontier-model panel is the *premium* tier of the council, not the only tier.
+I validated the **premium** tier in this POC (three frontier panel models). I have not yet run the **budget** tier on this exact CX sentiment brief — but OpenRouter's published numbers and the mechanism (disagreement is information, synthesis is where value lives) are the same. The frontier-model panel is the *premium* tier of the council, not the only tier.
+
+> **Disclaimer:** DRACO measures deep-research tasks, not rubric design. Benchmark scores are not a guarantee for your workflow. Multi-agent fusion adds latency and can fail in ways solo models do not (redundant agreement, judge blind spots, synthesizer smoothing). Treat published benchmarks as directional evidence, not a promise — and run your own eval on your task before betting production decisions on the pattern.
 
 ---
 

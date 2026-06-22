@@ -73,3 +73,11 @@ After the council returns its verdict, run these as separate follow-up turns:
 | Synthesizer | Claude Opus 4.8 |
 
 Panel models had web search and web fetch enabled. See [OpenRouter Fusion docs](https://openrouter.ai/docs/guides/routing/routers/fusion-router) for setup.
+
+---
+
+## Cost-efficient panel variant
+
+This POC used frontier models on the panel. For lower cost, OpenRouter's [DRACO benchmarks](https://openrouter.ai/blog/announcements/fusion-beats-frontier/) show a **budget panel** (e.g. Gemini 3 Flash + Kimi K2.6 + DeepSeek V4 Pro) fused by a frontier synthesizer can approach solo frontier performance at ~50% of the cost. Same brief, same judge/synthesizer architecture — swap the panel tier.
+
+See [README § Why fuse instead of one flagship model?](../README.md#why-fuse-instead-of-one-flagship-model) for economics, benchmark table, and disclaimers.
