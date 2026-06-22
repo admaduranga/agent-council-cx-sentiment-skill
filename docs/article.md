@@ -167,6 +167,12 @@ The next piece in this series will probably go deeper on the gold set and calibr
 
 ---
 
+## Repository
+
+The synthesized skill and full panel artifacts are in the companion repo: [`skills/cx-sentiment-analysis/SKILL.md`](../skills/cx-sentiment-analysis/SKILL.md). Copy to `.cursor/skills/` or `.claude/skills/` to use with Cursor or Claude Code. See [skills/README.md](../skills/README.md) for install commands.
+
+---
+
 ## Infographic prompt (for NotebookLM)
 
 > Generate a clean, modern, single-page infographic titled **"The AI Agent Council: How a Jury of Models Stress-Tests Your Idea."** Vertical top-to-bottom flow, 5 sections.

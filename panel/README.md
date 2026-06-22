@@ -24,6 +24,7 @@ Panel models had web search and web fetch enabled.
 
 | File | Description |
 |---|---|
+| [`../skills/cx-sentiment-analysis/SKILL.md`](../skills/cx-sentiment-analysis/SKILL.md) | Final synthesized agent skill (canonical deliverable) |
 | [`outputs/claude-opus-latest.md`](outputs/claude-opus-latest.md) | Claude's independent panel response |
 | [`outputs/openai-gpt-latest.md`](outputs/openai-gpt-latest.md) | GPT's independent panel response |
 | [`outputs/gemini-pro-latest.md`](outputs/gemini-pro-latest.md) | Gemini's independent panel response |

@@ -1,6 +1,6 @@
 # Production Roadmap — CX Sentiment SKILL.md
 
-Before this goes live, treat the `SKILL.md` as a **v1.0 candidate, not a finished product**. It's conceptually strong but has never touched real data — and several rules are assertions that haven't been validated. Here's a prioritized, phased plan.
+Before this goes live, treat the skill at [`skills/cx-sentiment-analysis/SKILL.md`](../skills/cx-sentiment-analysis/SKILL.md) as a **v1.0 candidate, not a finished product**. It's conceptually strong but has never touched real data — and several rules are assertions that haven't been validated. Here's a prioritized, phased plan.
 
 > **Context:** This roadmap was produced as a follow-up to the AI Agent Council verdict, in response to: *"What are the next steps to improve this SKILL.md before using in production?"* (Claude Opus 4.8)
 

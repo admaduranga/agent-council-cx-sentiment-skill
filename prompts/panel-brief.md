@@ -51,6 +51,8 @@ Do not settle for generic criticism. The specificity of the failure list is what
 2. Stress tests showing how the rebuilt framework behaves on hard cases (polite outage, polite churn threat, angry minor issue, resigned customer, sarcasm, ESL/terse, multi-stakeholder threads)
 3. A complete, production-ready `SKILL.md` with anchored scales, evidence requirements, deterministic scoring rules, and strict JSON output schema
 
+The synthesized skill from this POC lives at [`skills/cx-sentiment-analysis/SKILL.md`](../skills/cx-sentiment-analysis/SKILL.md).
+
 ---
 
 ## Follow-up prompts (optional)

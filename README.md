@@ -2,24 +2,74 @@
 
 **AI Agent Council POC:** stress-testing a SaaS support sentiment rubric with [OpenRouter Fusion](https://openrouter.ai/docs/guides/routing/routers/fusion-router).
 
-Single-model review is one opinion — even when the model is the best in the world. This repository documents a proof-of-concept where the same expert-panel brief was sent to three frontier models in parallel (Claude Opus, GPT, Gemini Pro), a judge surfaced the structure of their disagreement, and a synthesizer merged the best ideas into a production-ready `SKILL.md`.
+Single-model review is one opinion — even when the model is the best in the world. This repository documents a proof-of-concept where the same expert-panel brief was sent to three frontier models in parallel (Claude Opus, GPT, Gemini Pro), a judge surfaced the structure of their disagreement, and a synthesizer merged the best ideas into a portable agent skill.
 
 The canonical single-score sentiment design would rate a polite customer during a total production outage as **5/5** and route them away from retention. Every model on the council caught that flaw. The disagreement on *architecture* — while agreeing on the obvious — is the deliberation that earned the verdict.
 
 ---
 
-## What this repo contains
+## Repository layout
 
-| Path | Description |
+```
+agent-council-cx-sentiment-skill/
+├── README.md
+├── LICENSE
+│
+├── skills/                                 ← portable skills (copy to agent)
+│   ├── README.md
+│   └── cx-sentiment-analysis/
+│       ├── SKILL.md                        ← main rubric (§1–§14)
+│       └── reference.md                    ← provenance, stress tests
+│
+├── panel/                                  ← how the skill was built
+│   ├── README.md
+│   ├── outputs/                            ← raw panel model responses
+│   ├── verdict.md                          ← Fusion synthesizer output
+│   ├── comparative-review.md               ← which model won
+│   └── production-roadmap.md               ← path to production
+│
+├── prompts/
+│   └── panel-brief.md                      ← rerun the council
+│
+└── docs/
+    ├── article.md                          ← LinkedIn article
+    └── linkedin-post.md                    ← short teaser
+```
+
+---
+
+## Quick start — use the skill
+
+Skills live at [`skills/cx-sentiment-analysis/`](skills/cx-sentiment-analysis/). Copy into your agent's skills directory:
+
+```bash
+# Cursor (project)
+mkdir -p .cursor/skills && cp -r skills/cx-sentiment-analysis .cursor/skills/
+
+# Claude Code (project)
+mkdir -p .claude/skills && cp -r skills/cx-sentiment-analysis .claude/skills/
+```
+
+Invoke by name: **`cx-sentiment-analysis`** when analyzing support tickets.
+
+Full install options (global paths, both agents): [`skills/README.md`](skills/README.md)
+
+> **Disclaimer:** v1.0 **candidate, not production-validated**. See [panel/production-roadmap.md](panel/production-roadmap.md) before deploying.
+
+---
+
+## What each folder is for
+
+| Path | Purpose |
 |---|---|
-| [`artifacts/support-sentiment-skill/SKILL.md`](artifacts/support-sentiment-skill/SKILL.md) | **Canonical deliverable** — synthesized v1.0 rubric (§1–§14) |
+| [`skills/cx-sentiment-analysis/`](skills/cx-sentiment-analysis/) | **The deliverable** — portable Cursor/Claude agent skill |
+| [`skills/README.md`](skills/README.md) | Install commands for `.cursor/skills/` and `.claude/skills/` |
 | [`panel/outputs/`](panel/outputs/) | Raw independent outputs from each panel model |
-| [`panel/verdict.md`](panel/verdict.md) | Fusion synthesizer final verdict (critique + stress tests + merged SKILL.md) |
+| [`panel/verdict.md`](panel/verdict.md) | Fusion synthesizer final verdict |
 | [`panel/comparative-review.md`](panel/comparative-review.md) | Which model "won" and why |
-| [`panel/production-roadmap.md`](panel/production-roadmap.md) | Phased plan to take the SKILL.md to production |
+| [`panel/production-roadmap.md`](panel/production-roadmap.md) | Phased plan to take the skill to production |
 | [`prompts/panel-brief.md`](prompts/panel-brief.md) | Reproducible panel prompt |
 | [`docs/article.md`](docs/article.md) | Full LinkedIn article draft |
-| [`docs/linkedin-post.md`](docs/linkedin-post.md) | Short LinkedIn teaser |
 
 ---
 
@@ -27,7 +77,7 @@ The canonical single-score sentiment design would rate a polite customer during 
 
 ```mermaid
 flowchart TB
-  Brief[panel-brief.md] --> Panel
+  Brief[prompts/panel-brief.md] --> Panel
 
   subgraph fusion [OpenRouter Fusion]
     Panel[Panel: Claude + GPT + Gemini]
@@ -39,14 +89,10 @@ flowchart TB
   Panel --> Judge
   Judge --> Synth
   Synth --> Verdict[panel/verdict.md]
-  Verdict --> Skill[artifacts/.../SKILL.md]
+  Verdict --> Skill[skills/cx-sentiment-analysis/SKILL.md]
 ```
 
-**Flow:** panel → judge → synthesizer → verdict
-
-1. **Panel** — same brief dispatched in parallel to Claude Opus Latest, OpenAI GPT Latest, Google Gemini Pro Latest
-2. **Judge** — structured deliberation: consensus, contradictions, unique insights, blind spots
-3. **Synthesizer** — Claude Opus 4.8 merges the best of each into a final artifact
+**Flow:** panel → judge → synthesizer → verdict → skill
 
 ---
 
@@ -64,21 +110,11 @@ They disagreed on architecture — and that disagreement was the value:
 | Worked JSON examples | Few | **5 full** | Schema only |
 | Brevity / elegance | Medium | Verbose | **Best** |
 
-The final [`SKILL.md`](artifacts/support-sentiment-skill/SKILL.md) synthesizes GPT's precedence-and-caps scoring engine with Claude's governance scaffolding (Krippendorff's α ≥ 0.80, determinism controls) and Gemini's P1-outage baseline guardrail.
-
-See [`panel/comparative-review.md`](panel/comparative-review.md) for the full analysis.
+The final skill synthesizes GPT's precedence-and-caps scoring engine with Claude's governance scaffolding (Krippendorff's α ≥ 0.80, determinism controls) and Gemini's P1-outage baseline guardrail. See [`panel/comparative-review.md`](panel/comparative-review.md).
 
 ---
 
-## The deliverable
-
-The canonical artifact is [`artifacts/support-sentiment-skill/SKILL.md`](artifacts/support-sentiment-skill/SKILL.md).
-
-> **Disclaimer:** This is a **v1.0 candidate, not production-validated**. It has never been tested against real ticket data. Before deploying, follow the phased plan in [`panel/production-roadmap.md`](panel/production-roadmap.md) — starting with building a stratified gold set of ~200 anonymized cases.
-
----
-
-## How to reproduce
+## How to reproduce the council
 
 1. Copy the prompt from [`prompts/panel-brief.md`](prompts/panel-brief.md)
 2. Run it through [OpenRouter Fusion](https://openrouter.ai/docs/guides/routing/routers/fusion-router) with at least three panel models
@@ -104,7 +140,5 @@ MIT — see [LICENSE](LICENSE).
 - [OpenRouter Fusion: Surpassing Frontier Performance](https://openrouter.ai/blog/announcements/fusion-beats-frontier/)
 - [OpenRouter Fusion Router docs](https://openrouter.ai/docs/guides/routing/routers/fusion-router)
 - [AI Agent Council skill (MCP Market)](https://mcpmarket.com/tools/skills/ai-agent-council)
-- Talk Isn't Always Cheap: Understanding Failure Modes in Multi-Agent Debate ([arXiv 2509.05396](https://arxiv.org/abs/2509.05396))
 - [Agent Skills overview (Claude)](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
-- Smith & Kendall (1963) — Behaviorally Anchored Rating Scales (BARS)
-- Krippendorff, K. (2011). *Computing Krippendorff's Alpha-Reliability*
+- Talk Isn't Always Cheap: Understanding Failure Modes in Multi-Agent Debate ([arXiv 2509.05396](https://arxiv.org/abs/2509.05396))

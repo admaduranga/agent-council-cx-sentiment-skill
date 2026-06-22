@@ -1,4 +1,14 @@
-# SKILL.md — SaaS Technical Support CX Sentiment Analysis
+---
+name: cx-sentiment-analysis
+description: >-
+  Analyzes SaaS technical support interactions using a six-dimension sentiment
+  and churn-risk rubric with deterministic precedence scoring, verbatim evidence
+  quotes, and strict JSON output. Use when scoring support tickets, evaluating
+  customer sentiment, assessing churn or escalation risk, CX QA, or when the
+  user mentions support case sentiment analysis.
+---
+
+# SaaS Technical Support CX Sentiment Analysis
 
 **Version:** 1.0
 **Construct measured:** Customer support-experience state and risk — NOT lexical word polarity.
@@ -227,3 +237,9 @@ keep free-text reasoning out of label fields · emit the schema only · idempote
 7. Cited verbatim evidence for every required field?
 8. Set confidence honestly; abstained to 3 if low + no signal?
 9. Emitted valid schema with rubric_version?
+
+---
+
+## Additional context
+
+See [reference.md](reference.md) for provenance (AI Agent Council synthesis), production roadmap, and stress-test scenarios.

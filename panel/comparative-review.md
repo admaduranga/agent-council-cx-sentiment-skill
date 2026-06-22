@@ -46,4 +46,4 @@ Gemini's critique was the most readable and its "Polite Churner" / P1-outage-bas
 
 If you have to ship one file tomorrow, **GPT Latest's `SKILL.md` is the best standalone artifact** — most deterministic, auditable, and example-rich. But the **ideal** outcome is GPT's scoring engine **plus three Claude additions**: the α ≥ 0.80 governance target, the explicit determinism controls (temp 0 / idempotency), and the `resigned` affective state as a churn trigger.
 
-That synthesis is, in fact, what the final merged `SKILL.md` in [verdict.md](verdict.md) implemented — GPT's precedence-and-caps backbone hardened with Claude's governance and fairness scaffolding, and Gemini's outage-baseline guardrail folded in.
+That synthesis is, in fact, what the final merged skill at [`skills/cx-sentiment-analysis/SKILL.md`](../skills/cx-sentiment-analysis/SKILL.md) implemented — GPT's precedence-and-caps backbone hardened with Claude's governance and fairness scaffolding, and Gemini's outage-baseline guardrail folded in.
